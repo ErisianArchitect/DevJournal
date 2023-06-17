@@ -27,7 +27,6 @@ class Weekday:
     def short(self)->str:
         return self.name[:3]
 
-
 _us_weekday = [
     Weekday('Sunday'),
     Weekday('Monday'),
@@ -38,15 +37,16 @@ _us_weekday = [
     Weekday('Saturday'),
 ]
 
-_world_weekday = [
-    Weekday('Monday'),
-    Weekday('Tuesday'),
-    Weekday('Wednesday'),
-    Weekday('Thursday'),
-    Weekday('Friday'),
-    Weekday('Saturday'),
-    Weekday('Sunday'),
-]
+# I don't actually need this, right?
+# _world_weekday = [
+#     Weekday('Monday'),
+#     Weekday('Tuesday'),
+#     Weekday('Wednesday'),
+#     Weekday('Thursday'),
+#     Weekday('Friday'),
+#     Weekday('Saturday'),
+#     Weekday('Sunday'),
+# ]
 
 def get_date_date_string(date: datetime = None)->str:
     date = date or datetime.now()
@@ -104,32 +104,32 @@ def create_entry_string()->str:
     day = now.day
     dom_suffix = get_ordinal_suffix(day)
     day = f'{day}{dom_suffix}'
-    format_args = dict(
+    return journal_entry_template.format(
         day_of_week = now.strftime("%A"),
         month = now.strftime("%B"),
         day = day,
         year = now.year,
-    )
-    return journal_entry_template.format(**format_args)
+	)
 
 def format_date_table_day(day: int)->str:
     fmt = " {:>4} "
     day_ord = get_ordinal_suffix(day)
     return fmt.format(f'{day}{day_ord}')
 
-def format_week(days: Iterable,*,formatter = None)->str:
+def format_week(days: Iterable,*,formatter = None, none = '      ', strf = ' {:>4} ')->str:
     """
     Returns a line for a table for the following week.
     The iterable should return 7 elements.
     """
-    def day_formatter(day: int | None, formatter = formatter)->str:
+    def day_formatter(day: int | None)->str:
+        formatter = formatter or format_date_table_day
         match day:
             case int(day):
-                return format_date_table_day(day)
+                return formatter(day)
             case str(day):
-                return ' {:>4} '.format(day[:4])
+                return strf.format(day[:4])
             case _:
-                return '      '
+                return none
     return '|{}|'.format('|'.join(map(day_formatter,days)))
 
 def _adjust_weekday(weekday: int)->int:
