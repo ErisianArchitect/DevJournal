@@ -37,17 +37,6 @@ _us_weekday = [
     Weekday('Saturday'),
 ]
 
-# I don't actually need this, right?
-# _world_weekday = [
-#     Weekday('Monday'),
-#     Weekday('Tuesday'),
-#     Weekday('Wednesday'),
-#     Weekday('Thursday'),
-#     Weekday('Friday'),
-#     Weekday('Saturday'),
-#     Weekday('Sunday'),
-# ]
-
 def get_date_date_string(date: datetime = None)->str:
     date = date or datetime.now()
     day = date.day
