@@ -1,2 +1,15 @@
-\ignored\
-\journal_preview\
+# Has its own repo
+/journal_preview/
+# Dev Blog directory is part of its own git repo.
+/devblog/
+# Junk Directory
+/junk/
+# Like junk directory, except not for stuff that is meant to be temporary.
+/ignored/
+# Editing Markdown
+~*.md
+*.py
+*.pyc
+*.pyi
+*.code-workspace
+*.bat
