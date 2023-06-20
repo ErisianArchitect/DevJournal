@@ -1,4 +1,5 @@
 # Has its own repo
+*/__pycache__/
 /journal_preview/
 # Dev Blog directory is part of its own git repo.
 /devblog/
@@ -11,5 +12,5 @@
 *.py
 *.pyc
 *.pyi
-*.code-workspace
 *.bat
+*.code-workspace
